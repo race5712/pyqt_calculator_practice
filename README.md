@@ -8,5 +8,5 @@ PyQt5 based calculator - Used for practice (based on https://studyingrabbit.tist
 * 이번 시간에는 4칙 연산만 구현할 것
 
 ## Getting started
-* pyqt5 모듈 설치(python -m pip install pyqt5)
-* 파이썬 파일 실행(python calculator.main.py)
+* pyqt5 모듈 설치 (python -m pip install pyqt5)
+* 파이썬 파일 실행 (python calculator.main.py)
