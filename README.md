@@ -1,11 +1,23 @@
 # calculator_practice
 PyQt5 based calculator - Used for practice (based on https://studyingrabbit.tistory.com/23)
 
-## Goals
-* GitHub을 통해서 저장소를 만들고 설정하기
-* 저장소를 만든 후, 다음의 계산기 템플릿을 가져다가 계산기 만들기
-* pip를 통한 PyQt5 설치 필요
-* 이번 시간에는 4칙 연산만 구현할 것
+## Goals/UI 수정 요청 사항
+* 기존 UI에서 수정해야 할 항목들 수정하기
+- Equation, Solution 삭제 및 하나의 LineEdit로 바꾸기
+- 4칙연산 버튼 위치 변경하기
+  
+* 기존 계산기에 없는 항목(버튼)들 추가하기
+- %, CE, C, 1/x, x^2, √(2)x
+
+## Goals/기능 관련 요청 사항
+* 버튼들의 동작은 clicked.connect() 메서드를 이용하여 연결
+
+* Python의 exec 함수를 사용한 계산은 하지 말 것
+- math나 numpy 라이브러리를 활용하여 구현할 것
+
+* 기존 계산기에 없는 항목(버튼)에 기능 구현하기
+- 나머지, 값을 0으로 설정, 역수, 제곱, 제곱근
+
 
 ## Getting started
 * pyqt5 모듈 설치 (python -m pip install pyqt5)
