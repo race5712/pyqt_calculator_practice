@@ -12,7 +12,7 @@ PyQt5 based calculator - Used for practice (based on https://studyingrabbit.tist
 ## Goals/기능 관련 요청 사항
 * 버튼들의 동작은 clicked.connect() 메서드를 이용하여 연결
 
-* Python의 exec 함수를 사용한 계산은 하지 말 것<br>
+* Python의 eval() 함수를 사용한 계산은 하지 말 것<br>
 math나 numpy 라이브러리를 활용하여 구현할 것
 
 * 기존 계산기에 없는 항목(버튼)에 기능 구현하기<br>
