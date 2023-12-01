@@ -1,6 +1,4 @@
-from multiprocessing import BufferTooShort
 import sys
-from urllib.parse import quote_plus
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt
 
@@ -90,20 +88,6 @@ class Main(QDialog):
         button_double_zero = QPushButton("00")
         button_double_zero.clicked.connect(lambda state, num = "00": self.number_button_clicked(num))
         layout_box.addWidget(button_double_zero, 5, 0)
-
-        ### 기존 계산기에 없는 항목(버튼) 생성 %, CE, 1/x, x^2, √(2)x / C는 미리 구현된 것을 할용.
-        button_rest = QPushButton("%")
-        button_CE = QPushButton("CE")
-        button_reciprocal = QPushButton("1/x")
-        button_square = QPushButton("x^2")
-        button_squareroot = QPushButton("√(2)x")
-
-        ### %, CE, 1/x, x^2, √(2)x 버튼을 레이아웃에 추가
-        layout_box.addWidget(button_rest, 0, 0)
-        layout_box.addWidget(button_CE, 0, 1)
-        layout_box.addWidget(button_reciprocal, 1, 0)
-        layout_box.addWidget(button_square, 1, 1)
-        layout_box.addWidget(button_squareroot, 1, 2)
 
         ### 각 레이아웃을 main_layout 레이아웃에 추가
         main_layout.addWidget(label_equation)
