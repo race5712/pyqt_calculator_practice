@@ -8,6 +8,7 @@ PyQt5 based calculator - Used for practice (based on https://studyingrabbit.tist
   
 * 기존 계산기에 없는 항목(버튼)들 추가하기 <br>
 %, CE, C, 1/x, x^2, √(2)x  <br>
+
 * 00 버튼을 기존 계산기와 같이 +/-로 표현. 기능은 구현 x
 
 ## Goals/기능 관련 요청 사항
