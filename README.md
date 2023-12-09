@@ -7,7 +7,8 @@ PyQt5 based calculator - Used for practice (based on https://studyingrabbit.tist
 2. 4칙연산 버튼 위치 변경하기
   
 * 기존 계산기에 없는 항목(버튼)들 추가하기 <br>
-%, CE, C, 1/x, x^2, √(2)x
+%, CE, C, 1/x, x^2, √x  <br>
+* 추가적으로 00은 +/-로 바꾸기
 
 ## Goals/기능 관련 요청 사항
 * 버튼들의 동작은 clicked.connect() 메서드를 이용하여 연결
