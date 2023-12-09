@@ -80,23 +80,23 @@ class Main(QDialog):
                 layout_box.addWidget(number_button_dict[number], 5, 1)
             
 
-        ### 소숫점 버튼과 00 버튼을 입력하고 시그널 설정
+        ### 소숫점 버튼을 입력하고 시그널 설정
         button_dot = QPushButton(".")
         button_dot.clicked.connect(lambda state, num = ".": self.number_button_clicked(num))
         layout_box.addWidget(button_dot, 5, 2)
 
-        button_double_zero = QPushButton("00")
-        button_double_zero.clicked.connect(lambda state, num = "00": self.number_button_clicked(num))
-        layout_box.addWidget(button_double_zero, 5, 0)
+        ### +/- 버튼만 완성. 시그널은 구현 x
+        button_plus_minus = QPushButton("+/-")
+        layout_box.addWidget(button_plus_minus, 5, 0)
 
-        ### 기존 계산기에 없는 항목(버튼) 생성 %, CE, 1/x, x^2, √(2)x / C는 미리 구현된 것을 할용.
+        ### 기존 계산기에 없는 항목(버튼) 생성 %, CE, 1/x, x^2, √x / C는 미리 구현된 것을 할용.
         button_rest = QPushButton("%")
         button_CE = QPushButton("CE")
         button_reciprocal = QPushButton("1/x")
         button_square = QPushButton("x^2")
-        button_squareroot = QPushButton("√(2)x")
+        button_squareroot = QPushButton("√x")
 
-        ### %, CE, 1/x, x^2, √(2)x 버튼을 레이아웃에 추가
+        ### %, CE, 1/x, x^2, √x 버튼을 레이아웃에 추가
         layout_box.addWidget(button_rest, 0, 0)
         layout_box.addWidget(button_CE, 0, 1)
         layout_box.addWidget(button_reciprocal, 1, 0)
@@ -111,24 +111,51 @@ class Main(QDialog):
         self.setLayout(main_layout)
         self.show()
 
+        self.save_number = 0
+        self.save_operation = ''
+        self.save_old_number = 0
     #################
     ### functions ###
     #################
     def number_button_clicked(self, num):
-        equation = self.equation.text()
-        equation += str(num)
-        self.equation.setText(equation)
+        if self.save_old_number == 0:
+            equation = self.equation.text()
+            equation += str(num)
+            self.equation.setText(equation)
+        else:
+            equation = self.equation.text()
+            equation += str(num)
+            self.equation.setText(equation)
+            self.save_number = int(equation)
 
     def button_operation_clicked(self, operation):
         equation = self.equation.text()
-        equation += operation
-        self.equation.setText(equation)
+        self.save_old_number = int(equation)
+        self.save_operation = operation
+        self.equation.setText("")
 
     def button_equal_clicked(self):
-        equation = self.equation.text()
         try:
-            solution = eval(equation)
-            self.equation.setText(str(solution))
+            if self.save_operation == '+':
+                solution = self.save_old_number + self.save_number
+                self.equation.setText(str(solution))
+                self.save_old_number = 0
+                self.save_number = 0
+            elif self.save_operation == '-':
+                solution = self.save_old_number - self.save_number
+                self.equation.setText(str(solution))
+                self.save_old_number = 0
+                self.save_number = 0
+            elif self.save_operation == '*':
+                solution = self.save_old_number * self.save_number
+                self.equation.setText(str(solution))
+                self.save_old_number = 0
+                self.save_number = 0
+            elif self.save_operation == '/':
+                solution = self.save_old_number / self.save_number
+                self.equation.setText(str(solution))
+                self.save_old_number = 0
+                self.save_number = 0
         except Exception as e:
             self.equation.setText("")
 
