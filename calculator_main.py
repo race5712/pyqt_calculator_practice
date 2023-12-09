@@ -78,7 +78,6 @@ class Main(QDialog):
                 layout_box.addWidget(number_button_dict[number], 4, 0)
             elif number == 0:
                 layout_box.addWidget(number_button_dict[number], 5, 1)
-            
 
         ### 소숫점 버튼을 입력하고 시그널 설정
         button_dot = QPushButton(".")
@@ -89,12 +88,20 @@ class Main(QDialog):
         button_plus_minus = QPushButton("+/-")
         layout_box.addWidget(button_plus_minus, 5, 0)
 
-        ### 기존 계산기에 없는 항목(버튼) 생성 %, CE, 1/x, x^2, √x / C는 미리 구현된 것을 할용.
+        ### 기존 계산기에 없는 항목(버튼) 생성 %, CE, 1/x, x^2, √x / C는 미리 구현된 것을 활용.
         button_rest = QPushButton("%")
         button_CE = QPushButton("CE")
         button_reciprocal = QPushButton("1/x")
         button_square = QPushButton("x^2")
         button_squareroot = QPushButton("√x")
+
+        ### %, CE, 1/x, x^2, √x 버튼 클릭 시 시그널 설정/ CE는 C와 같은 동작으로 구현하기에 같은 함수 사용.
+        button_rest.clicked.connect(self.button_rest_clicked)
+        button_CE.clicked.connect(self.button_C_clicked)
+        button_reciprocal.clicked.connect(self.button_reciprocal_clicked)
+        button_square.clicked.connect(self.button_square_clicked)
+        button_squareroot.clicked.connect(self.button_squareroot_clicked)
+        
 
         ### %, CE, 1/x, x^2, √x 버튼을 레이아웃에 추가
         layout_box.addWidget(button_rest, 0, 0)
@@ -156,9 +163,14 @@ class Main(QDialog):
                 self.equation.setText(str(solution))
                 self.save_old_number = 0
                 self.save_number = 0
+            elif self.save_operation == '%':
+                solution = self.save_old_number % self.save_number
+                self.equation.setText(str(solution))
+                self.save_old_number = 0
+                self.save_number = 0
         except Exception as e:
             self.equation.setText("")
-
+    
     def button_C_clicked(self):
         self.equation.setText("")
 
@@ -166,6 +178,36 @@ class Main(QDialog):
         equation = self.equation.text()
         equation = equation[:-1]
         self.equation.setText(equation)
+
+    def button_rest_clicked(self):
+        equation = self.equation.text()
+        self.save_old_number = int(equation)
+        self.save_operation = "%"
+        self.equation.setText("")
+
+    def button_reciprocal_clicked(self):
+        try:
+            equation = self.equation.text()
+            solution = 1 / int(equation)
+            self.equation.setText(str(solution))
+        except Exception as e:
+            self.equation.setText("")
+    
+    def button_square_clicked(self):
+        try:
+            equation = self.equation.text()
+            solution = int(equation) * int(equation)
+            self.equation.setText(str(solution))
+        except Exception as e:
+            self.equation.setText("")
+
+    def button_squareroot_clicked(self):
+        try:
+            equation = self.equation.text()
+            solution = int(equation) ** 0.5
+            self.equation.setText(str(solution))
+        except Exception as e:
+            self.equation.setText("")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
